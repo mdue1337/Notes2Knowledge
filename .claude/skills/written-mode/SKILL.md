@@ -13,14 +13,14 @@ challenges, and judges.
 
 Course comes from the skill argument; if not supplied, ask.
 
-1. Resolve `exam_type` via `python3 scripts/vault.py courseinfo <course> exam_type`
+1. Resolve `exam_type` via `python3 scripts/vault.py courseinfo "<course>" exam_type`
    from the repo root. If it is not `written`, stop and tell the user to
    use `oral-mode` instead — do not proceed.
 2. If a topic was not supplied as an argument, find one via
-   `python3 scripts/progress.py weakest <course>`. If that exits nonzero
+   `python3 scripts/progress.py weakest "<course>"`. If that exits nonzero
    (no history yet), ask the user which topic to practice.
-3. Read the topic's notes: `python3 scripts/vault.py notes <course> <topic>`.
-4. Read the topic's exercises: `python3 scripts/vault.py exercises <course> <topic>`.
+3. Read the topic's notes: `python3 scripts/vault.py notes "<course>" "<topic>"`.
+4. Read the topic's exercises: `python3 scripts/vault.py exercises "<course>" "<topic>"`.
    If this exits nonzero (no exercises.md yet), proceed using only the notes.
 
 ## What to do
@@ -36,7 +36,7 @@ Course comes from the skill argument; if not supplied, ask.
      answer yourself** — if the user asks for it outright, redirect them
      back to the relevant section of their own notes instead.
 4. After each question is resolved (correct or the user gives up), record
-   the outcome: `python3 scripts/progress.py record <course> <topic> <concept> <struggled|solid>`
+   the outcome: `python3 scripts/progress.py record "<course>" "<topic>" "<concept>" <struggled|solid>`
    — `struggled` if they needed more than one follow-up or gave up,
    `solid` if they got it on the first answer.
 5. Continue until the user says to stop.
