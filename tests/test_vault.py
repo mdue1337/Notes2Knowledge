@@ -135,3 +135,20 @@ def test_cli_courseinfo_missing_course_exits_nonzero():
 
     assert result.returncode == 1
     assert "Traceback" not in result.stderr
+
+
+def test_cli_missing_vault_path_in_config_exits_nonzero(tmp_path):
+    config_file = tmp_path / "config.env"
+    config_file.write_text("SOME_OTHER_KEY=value\n")
+
+    result = subprocess.run(
+        [sys.executable, str(SCRIPT), "courseinfo", "sample_course", "exam_type"],
+        capture_output=True,
+        text=True,
+        cwd=str(Path(__file__).resolve().parent.parent),
+        env={**os.environ, "CONFIG_PATH": str(config_file)},
+    )
+
+    assert result.returncode == 1
+    assert "Traceback" not in result.stderr
+    assert "VAULT_PATH" in result.stderr

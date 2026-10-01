@@ -76,7 +76,10 @@ def _resolve_vault_path() -> Path:
     fixture_override = os.environ.get("VAULT_FIXTURE_PATH")
     if fixture_override:
         return Path(fixture_override)
-    return Path(load_config()["VAULT_PATH"])
+    config = load_config()
+    if "VAULT_PATH" not in config:
+        raise ValueError("config.env is missing the VAULT_PATH key. See config.example.env for the expected format.")
+    return Path(config["VAULT_PATH"])
 
 
 def main() -> None:
