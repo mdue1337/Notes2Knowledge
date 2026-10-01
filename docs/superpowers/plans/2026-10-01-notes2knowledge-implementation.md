@@ -541,12 +541,12 @@ def test_record_outcome_rejects_invalid_outcome(tmp_path):
         record_outcome(db_path, "Algorithms", "03 - Binary Search Trees", "rotation", "unsure")
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run: `cd Notes2Knowledge && python3 -m pytest tests/test_progress.py -v`
 Expected: FAIL with `ModuleNotFoundError: No module named 'progress'`
 
-- [ ] **Step 3: Implement schema creation and `record_outcome`**
+- [x] **Step 3: Implement schema creation and `record_outcome`**
 
 ```python
 # Notes2Knowledge/scripts/progress.py
@@ -591,12 +591,12 @@ def record_outcome(db_path: Path, course: str, topic: str, concept: str, outcome
         conn.close()
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
 Run: `cd Notes2Knowledge && python3 -m pytest tests/test_progress.py -v`
 Expected: 2 passed
 
-- [ ] **Step 5: Write failing tests for `get_weakest_topic`**
+- [x] **Step 5: Write failing tests for `get_weakest_topic`**
 
 ```python
 # append to Notes2Knowledge/tests/test_progress.py
@@ -622,12 +622,12 @@ def test_get_weakest_topic_ignores_other_courses(tmp_path):
     assert get_weakest_topic(db_path, "Algorithms") is None
 ```
 
-- [ ] **Step 6: Run tests to verify the new ones fail**
+- [x] **Step 6: Run tests to verify the new ones fail**
 
 Run: `cd Notes2Knowledge && python3 -m pytest tests/test_progress.py -v`
 Expected: the 3 new tests FAIL with `ImportError: cannot import name 'get_weakest_topic'`
 
-- [ ] **Step 7: Implement `get_weakest_topic`**
+- [x] **Step 7: Implement `get_weakest_topic`**
 
 ```python
 # append to Notes2Knowledge/scripts/progress.py
@@ -653,12 +653,12 @@ def get_weakest_topic(db_path: Path, course: str) -> str | None:
     return row[0] if row else None
 ```
 
-- [ ] **Step 8: Run tests to verify they pass**
+- [x] **Step 8: Run tests to verify they pass**
 
 Run: `cd Notes2Knowledge && python3 -m pytest tests/test_progress.py -v`
 Expected: 5 passed
 
-- [ ] **Step 9: Write failing CLI smoke tests**
+- [x] **Step 9: Write failing CLI smoke tests**
 
 ```python
 # append to Notes2Knowledge/tests/test_progress.py
@@ -704,12 +704,12 @@ def test_cli_weakest_no_history_exits_nonzero(tmp_path):
     assert result.returncode == 1
 ```
 
-- [ ] **Step 10: Run tests to verify they fail**
+- [x] **Step 10: Run tests to verify they fail**
 
 Run: `cd Notes2Knowledge && python3 -m pytest tests/test_progress.py -v`
 Expected: the 2 new tests FAIL (no `__main__` dispatch exists yet)
 
-- [ ] **Step 11: Implement the CLI dispatch**
+- [x] **Step 11: Implement the CLI dispatch**
 
 ```python
 # append to Notes2Knowledge/scripts/progress.py
@@ -763,12 +763,12 @@ if __name__ == "__main__":
 Move the `import os` to the top of the file with the other imports rather
 than leaving it inline.
 
-- [ ] **Step 12: Run full test file to verify everything passes**
+- [x] **Step 12: Run full test file to verify everything passes**
 
 Run: `cd Notes2Knowledge && python3 -m pytest tests/test_progress.py -v`
 Expected: 7 passed
 
-- [ ] **Step 13: Commit**
+- [x] **Step 13: Commit**
 
 ```bash
 git add scripts/progress.py tests/test_progress.py
@@ -786,7 +786,7 @@ git commit -m "feat: add local progress-tracking module"
 - Consumes: `python3 scripts/vault.py courseinfo <course> exam_type`, `python3 scripts/vault.py notes <course> <topic>`, `python3 scripts/vault.py exercises <course> <topic>`, `python3 scripts/progress.py weakest <course>`, `python3 scripts/progress.py record <course> <topic> <concept> <struggled|solid>` (all from Tasks 3–4).
 - Produces: nothing consumed by later tasks — this is a leaf skill, verified manually.
 
-- [ ] **Step 1: Write the skill file**
+- [x] **Step 1: Write the skill file**
 
 ```markdown
 ---
@@ -838,7 +838,7 @@ Nothing is written to any file. The only durable output is the
 `progress.py record` calls made during the session.
 ```
 
-- [ ] **Step 2: Manually verify against fixture data**
+- [x] **Step 2: Manually verify against fixture data**
 
 Using the fixture topic from Task 3
 (`Notes2Knowledge/tests/fixtures/sample_course/Week 3/03 - Binary Search Trees.md`),
@@ -851,7 +851,7 @@ project skills created or modified mid-session, so skill changes are
 checked by walking the SKILL.md's instructions against fixture data
 rather than a live Skill tool invocation).
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add .claude/skills/written-mode/SKILL.md
@@ -869,7 +869,7 @@ git commit -m "feat: add written-mode skill"
 - Consumes: `python3 scripts/vault.py courseinfo <course> exam_type`, `python3 scripts/vault.py notes <course> <topic>`, `python3 scripts/progress.py weakest <course>`, `python3 scripts/progress.py record <course> <topic> <concept> <struggled|solid>` (all from Tasks 3–4). Does not use `vault.py exercises` — explain-back practice works from notes alone.
 - Produces: nothing consumed by later tasks — this is a leaf skill, verified manually.
 
-- [ ] **Step 1: Write the skill file**
+- [x] **Step 1: Write the skill file**
 
 ```markdown
 ---
@@ -918,7 +918,7 @@ Nothing is written to any file. The only durable output is the
 `progress.py record` calls made during the session.
 ```
 
-- [ ] **Step 2: Manually verify against fixture data**
+- [x] **Step 2: Manually verify against fixture data**
 
 Using the same fixture topic as Task 5, walk through the skill's own
 instructions by hand: confirm it would read the fixture note via the
@@ -926,7 +926,7 @@ exact CLI command above, prompt for an explanation of BSTs, and correctly
 withhold the explanation itself if the user asks for it outright instead
 of attempting one.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add .claude/skills/oral-mode/SKILL.md

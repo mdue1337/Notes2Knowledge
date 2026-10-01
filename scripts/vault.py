@@ -19,12 +19,7 @@ def load_config(path: Path | None = None) -> dict[str, str]:
         if not line or line.startswith("#"):
             continue
         key, _, value = line.partition("=")
-        value = value.partition("#")[0]
-        key = key.strip()
-        value = value.strip()
-        if not value:
-            raise ValueError(f"Config key '{key}' in {path} has an empty value.")
-        config[key] = value
+        config[key.strip()] = value.strip()
     return config
 
 
@@ -43,11 +38,7 @@ def read_courseinfo(vault_path: Path, course: str) -> dict[str, str]:
             continue
         key, _, value = line.partition(":")
         value = value.partition("#")[0]
-        key = key.strip()
-        value = value.strip()
-        if not value:
-            raise ValueError(f"Courseinfo key '{key}' in {courseinfo_path} has an empty value.")
-        info[key] = value
+        info[key.strip()] = value.strip()
     return info
 
 
@@ -82,14 +73,10 @@ def read_exercises(vault_path: Path, course: str, topic: str) -> str:
 
 
 def _resolve_vault_path() -> Path:
-    # test-only: see tests/test_vault.py; not a public interface
     fixture_override = os.environ.get("VAULT_FIXTURE_PATH")
     if fixture_override:
         return Path(fixture_override)
-    config = load_config()
-    if "VAULT_PATH" not in config:
-        raise ValueError("config.env has no VAULT_PATH key. Add VAULT_PATH=/path/to/vault to config.env.")
-    return Path(config["VAULT_PATH"])
+    return Path(load_config()["VAULT_PATH"])
 
 
 def main() -> None:
