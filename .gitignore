@@ -1,0 +1,5 @@
+config.env
+data/progress.sqlite
+__pycache__/
+*.pyc
+.pytest_cache/
